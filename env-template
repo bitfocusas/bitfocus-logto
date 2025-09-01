@@ -1,5 +1,6 @@
 TRUST_PROXY_HEADER=1
 DB_URL=postgres://postgres:p0stgr3s@127.0.0.1:5432/logto
+DATABASE_CONNECTION_TIMEOUT=30000
 ENDPOINT=http://localhost:4001
 ADMIN_ENDPOINT=http://localhost:4002
 PORT=4001
