@@ -3,9 +3,24 @@ import { findUp } from 'find-up'
 
 dotenv.config({ path: await findUp('.env', {}) })
 
-// Map LOGTO_DATABASE_URL to DB_URL for compatibility with root env
-if (process.env.LOGTO_DATABASE_URL && !process.env.DB_URL) {
-	process.env.DB_URL = process.env.LOGTO_DATABASE_URL
+// Environment variable mapping for compatibility with root env
+const envMappings: Record<string, string> = {
+	LOGTO_DATABASE_URL: 'DB_URL',
+	LOGTO_CORE_PORT: 'PORT',
+	LOGTO_ADMIN_PORT: 'ADMIN_PORT',
+	LOGTO_ADMIN_URL: 'ADMIN_ENDPOINT',
+	LOGTO_CORE_URL: 'ENDPOINT',
+	LOGTO_TRUST_PROXY_HEADER: 'TRUST_PROXY_HEADER',
+	LOGTO_DATABASE_CONNECTION_TIMEOUT: 'DATABASE_CONNECTION_TIMEOUT',
 }
+
+// Apply environment variable mappings
+for (const [sourceVar, targetVar] of Object.entries(envMappings)) {
+	if (process.env[sourceVar] && !process.env[targetVar]) {
+		process.env[targetVar] = process.env[sourceVar]
+	}
+}
+
+console.log('process.env:', process.env)
 
 await import('./main.js')
