@@ -68,5 +68,6 @@
   "dependencies": {
     "@logto/cli": "workspace:^",
     "@logto/translate": "workspace:^"
-  }
+  },
+  "packageManager": "pnpm@10.15.1"
 }
