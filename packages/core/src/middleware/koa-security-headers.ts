@@ -14,7 +14,7 @@ import { EnvSet, AdminApps, getTenantEndpoint } from '#src/env-set/index.js'
  * @returns koa middleware
  */
 
-const BUTTONS_ORIGIN = 'http://localhost:3001'
+const BUTTONS_ORIGIN = process.env.APP_EMBED_ORIGIN
 
 const helmetPromise = async (settings: HelmetOptions, request: IncomingMessage, response: ServerResponse) =>
 	promisify((callback) => {
